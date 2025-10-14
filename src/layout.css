@@ -41,11 +41,13 @@
     border: 1px solid #ccc;
     z-index: 2;
 }
+
 .layout__topbar label .content ul {
     display: flex;
     flex-direction: column;
     gap: .2em;
 }
+
 .layout__topbar label .content ul li {
     line-height: 2em;
     list-style: none;
@@ -58,9 +60,18 @@
     background-color: var(--theme-color);
 }
 
-.filemenu {display: none;}
-#filemenu:checked + .filemenu {display: block;}
-#filemenu:checked ~ label[for="filemenu"] {display: block;}
+.filemenu {
+    display: none;
+}
+
+#filemenu:checked+.filemenu {
+    display: block;
+}
+
+#filemenu:checked~label[for="filemenu"] {
+    display: block;
+}
+
 label[for="filemenu"] {
     position: fixed;
     display: none;
@@ -173,6 +184,11 @@ label[for="filemenu"] {
 #editor {
     position: relative;
     padding: .5em;
+    font-family: 'Noto Sans Math', sans-serif;
+}
+
+#editor .row {
+    line-height: 1.8em;
 }
 
 #complement {

@@ -5,7 +5,7 @@ export function handlePlus(e:KeyboardEvent) {
 
 export function handleMinus(e:KeyboardEvent) {
     e.preventDefault();
-    document.execCommand('insertText', false, ' - ')
+    document.execCommand('insertText', false, ' − ')
 }
 
 export function handleEqual(e:KeyboardEvent) {

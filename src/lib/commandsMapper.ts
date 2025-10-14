@@ -31,7 +31,7 @@ export const commands: command[] = [
             let tds: HtmlStructure[] = [];
 
             for (let t = 0; t < columns; t++) {
-                tds.push({ tag: "td", text: '□' });
+                tds.push({ tag: "td", text: '□', focus: true });
             }
             for (let r = 0; r < rows; r++) {
                 children.push({
@@ -40,9 +40,15 @@ export const commands: command[] = [
                 })
             }
             return ({
-                tag: 'table',
+                tag: 'div',
                 class: "pt-bracket pt-bracket--round",
-                children,
+                children:[
+                    {
+                        tag: 'table',
+                        class: "pt-matrix",
+                        children
+                    }
+                ],
             } satisfies HtmlStructure);
         }
     },
@@ -53,8 +59,8 @@ export const commands: command[] = [
             return {
                 class: "pt-integral",
                 children: [
-                    { class: "pt-integral__upper-limit", text: match?.[3]??ZWSP, focus:true },
-                    { class: "pt-integral__lower-limit", text: match?.[2]??ZWSP, focus:true },
+                    { class: "pt-integral__lower-limit", text: match?.[2] ?? '□', focus: true },
+                    { class: "pt-integral__upper-limit", text: match?.[3] ?? '□', focus: true },
                     { class: "pt-integral__symbol" },
                 ],
             };

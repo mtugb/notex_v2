@@ -23,13 +23,15 @@ editor.addEventListener('keydown', e => {
     (async () => {
         if (e.ctrlKey && e.key === 's') {
             e.preventDefault();
-            try{if (fileName) {
-                directoryController.saveFile(fileName, editor.innerHTML);
-            } else {
-                fileName = await directoryController.saveFileAs(editor.innerHTML);
-                fileNameArea.textContent = fileName;
-            }}catch(error){
-                console.error({'保存エラー：':error})
+            try {
+                if (fileName) {
+                    directoryController.saveFile(fileName, editor.innerHTML);
+                } else {
+                    fileName = await directoryController.saveFileAs(editor.innerHTML);
+                    fileNameArea.textContent = fileName;
+                }
+            } catch (error) {
+                console.error({ '保存エラー：': error })
             }
         }
     })();
@@ -64,6 +66,13 @@ editor.addEventListener('keyup', e => {
             complementController.render();
         }, 100);
 
+    })();
+    (() => {
+        if (e.key === ' ') {
+            //スペース押したら予測変換解除
+            complementController.close();
+            complementController.render();
+        }
     })();
 })
 
@@ -103,3 +112,11 @@ saveFileBtn.onclick = async () => {
         fileNameArea.textContent = fileName;
     }
 }
+
+document.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 'd') {
+        e.preventDefault();
+        const selection = getSelection();
+        console.log({ selection })
+    }
+})

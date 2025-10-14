@@ -4,6 +4,7 @@ import { handleArrowUp } from "../keyevents/ArrowUp";
 import { handleEnter } from "../keyevents/Enter";
 import { handleEqual, handleMinus, handlePlus, handleTimes } from "../keyevents/Operators";
 import { handleSpace } from "../keyevents/Space";
+import { handleTab } from "../keyevents/Tab";
 import type { ComplementController } from "./complement";
 import type { FocusController } from "./focusController";
 
@@ -20,4 +21,5 @@ export const keyEventMap:KeyEventMap = {
     '-': handleMinus,
     '=': handleEqual,
     '*': handleTimes,
+    'Tab': handleTab,
 } as const;
