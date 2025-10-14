@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/notex.svg" />
+  <link rel="stylesheet" href="src/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>notex</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mtugb/pureTex@v1.1.0/styles/puretex.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+
+<body>
+  <div id="app">
+
+    <div class="layout">
+      <div class="layout__topbar">
+        <img src="/notex.svg" alt="notex logo">
+        <label href="javascript:void(0)">
+          ファイル
+          <input type="checkbox" id="filemenu" hidden>
+          <div class="content filemenu">
+            <ul>
+              <li id="saveFileBtn">保存</li>
+              <li id="saveFileAsBtn">名前を付けて保存</li>
+              <li id="openFolderBtn">フォルダを開く</li>
+            </ul>
+          </div>
+          <label for="filemenu"></label>
+        </label>
+        <label href="javascript:void(0)">編集</label>
+      </div>
+      <div class="layout__sidemenu">
+        <div class="layout__sidemenu-button"><i class="fa-solid fa-file"></i></div>
+      </div>
+      <div class="layout__sidecontent">
+        <button id="openDir">ディレクトリを開く</button>
+        <div class="container">
+          <div id="dirName"></div>
+          <div>
+            <div></div>
+          </div>
+        </div>
+        <div id="dirView"></div>
+      </div>
+      <div class="layout__main">
+        <div class="file-tabs">
+          <div class="tab ntx" id="fileName">
+            名称未設定
+            <div class="unsaved"><i class="fa-solid fa-circle"></i></div>
+          </div>
+        </div>
+        <div class="editor-area">
+          <div id="editor" contenteditable>
+            <div class="row"><br></div>
+            <ul id="complement" contenteditable="false"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="layout__footber"></div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+<style>
+
+</style>
+
+</html>
