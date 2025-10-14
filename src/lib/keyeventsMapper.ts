@@ -7,7 +7,8 @@ import { handleSpace } from "../keyevents/Space";
 import type { ComplementController } from "./complement";
 import type { FocusController } from "./focusController";
 
-type KeyEventMap = Record<string, (e:KeyboardEvent, complementController:ComplementController, focusController:FocusController)=>void>;
+export type KeyEventFunction = (e:KeyboardEvent, complementController:ComplementController, focusController:FocusController)=>void;
+type KeyEventMap = Record<string, KeyEventFunction>;
 
 export const keyEventMap:KeyEventMap = {
     'Enter': handleEnter,

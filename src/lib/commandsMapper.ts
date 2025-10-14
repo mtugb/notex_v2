@@ -53,8 +53,8 @@ export const commands: command[] = [
             return {
                 class: "pt-integral",
                 children: [
-                    { class: "pt-integral__upper-limit", text: match?.[3]??ZWSP },
-                    { class: "pt-integral__lower-limit", text: match?.[2]??ZWSP },
+                    { class: "pt-integral__upper-limit", text: match?.[3]??ZWSP, focus:true },
+                    { class: "pt-integral__lower-limit", text: match?.[2]??ZWSP, focus:true },
                     { class: "pt-integral__symbol" },
                 ],
             };

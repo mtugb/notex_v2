@@ -31,8 +31,17 @@ export class FocusController {
 
 
 function focusNode(node:Node) {
-    const range = getRange();
-    if (!range) return;
+    console.log('---fire!!!!')
+    const sel = document.getSelection();
+    if (!sel) {
+        console.error('no selection')
+        return;
+    };
+    const range = document.createRange();
     if (node.childNodes[0] instanceof Text) node = node.childNodes[0];
+    console.log({node})
     range.setStart(node, 0);
+    range.collapse();
+    sel.removeAllRanges();
+    sel.addRange(range);
 }
