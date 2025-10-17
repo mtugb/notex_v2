@@ -188,7 +188,7 @@ label[for="filemenu"] {
 }
 
 #editor .row {
-    line-height: 1.8em;
+    margin: 1em 0;
 }
 
 #complement {

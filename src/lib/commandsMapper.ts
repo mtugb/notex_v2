@@ -20,8 +20,8 @@ export const commands: command[] = [
         name: ['mat', 'matrix'],
         type: 'html',
         compose(match?: RegExpMatchArray) {
-            let columns = Number(match?.[2]);
-            let rows = Number(match?.[3]);
+            let columns = Number(match?.[3]);
+            let rows = Number(match?.[2]);
             if (!columns || !rows) {
                 columns = 2;
                 rows = 2;
@@ -42,7 +42,7 @@ export const commands: command[] = [
             return ({
                 tag: 'div',
                 class: "pt-bracket pt-bracket--round",
-                children:[
+                children: [
                     {
                         tag: 'table',
                         class: "pt-matrix",
@@ -59,8 +59,20 @@ export const commands: command[] = [
             return {
                 class: "pt-integral",
                 children: [
-                    { class: "pt-integral__lower-limit", text: match?.[2] ?? '□', focus: true },
-                    { class: "pt-integral__upper-limit", text: match?.[3] ?? '□', focus: true },
+                    {
+                        class: "pt-integral__lower-limit", children: [
+                            {
+                                text: match?.[2] ?? '□', focus: true
+                            }
+                        ]
+                    },
+                    {
+                        class: "pt-integral__upper-limit", children: [
+                            {
+                                text: match?.[3] ?? '□', focus: true
+                            }
+                        ]
+                    },
                     { class: "pt-integral__symbol" },
                 ],
             };
