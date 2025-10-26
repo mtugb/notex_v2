@@ -11,7 +11,7 @@ export function handleCommand(match: RegExpMatchArray, focusController: FocusCon
     if (!command) return;
     switch (command.type) {
         case 'html': {
-            insertHTML(match, command.compose(), focusController);
+            insertHTML('noArg', match, command.compose(), focusController);
             break;
         }
         case 'text': {
@@ -28,7 +28,7 @@ export function handleCommandWithArguments(match: RegExpMatchArray, callback?: (
     if (!command) return;
     switch (command.type) {
         case 'html': {
-            insertHTML(match, command.compose(match));
+            insertHTML('withArg', match, command.compose(match));
             break;
         }
     }
@@ -57,7 +57,7 @@ function insertText(match: RegExpMatchArray, text: string) {
 }
 
 
-function insertHTML(match: RegExpMatchArray, htmlStructure: HtmlStructure, focusController?: FocusController) {
+function insertHTML(commandMode: 'withArg' | 'noArg', match: RegExpMatchArray, htmlStructure: HtmlStructure, focusController?: FocusController) {
     const composedHtml = composeHtml(htmlStructure);
     const sel = document.getSelection();
     const range = sel?.getRangeAt(0);
@@ -76,7 +76,7 @@ function insertHTML(match: RegExpMatchArray, htmlStructure: HtmlStructure, focus
     newRange.insertNode(textNode);
     newRange.insertNode(composedHtml.html);
     newRange.insertNode(document.createTextNode(ZWSP));//前にいれることで、前に戻ってA=とかかける
-    const elementToFocus = composedHtml.elementToFocus;
+    const elementToFocus = composedHtml.elementsToFocus?.[commandMode];
     let customFocusApplied = false; // ★追加: カスタムフォーカス適用フラグ
 
     if (focusController && elementToFocus && elementToFocus?.length > 0) {
