@@ -14,6 +14,10 @@ export function handleCommand(match: RegExpMatchArray, focusController: FocusCon
             insertHTML(match, command.compose(), focusController);
             break;
         }
+        case 'text': {
+            insertText(match, command.compose());
+            break;
+        }
     }
     callback?.();
 }
@@ -29,6 +33,27 @@ export function handleCommandWithArguments(match: RegExpMatchArray, callback?: (
         }
     }
     callback?.();
+}
+
+function insertText(match: RegExpMatchArray, text: string) {
+    const sel = document.getSelection();
+    const range = sel?.getRangeAt(0);
+    const node = range?.startContainer;
+    if (!sel || !range || !node) return;
+    const wordStart = range.startOffset - match[0].length;
+    const wordEnd = range.startOffset;
+
+    // Rangeをその単語の範囲に設定
+    const newRange = document.createRange();
+    newRange.setStart(node, wordStart);
+    newRange.setEnd(node, wordEnd);
+
+    newRange.deleteContents();
+    const textNode = document.createTextNode(text);
+    newRange.insertNode(textNode);
+    newRange.collapse();
+    sel.removeAllRanges();
+    sel.addRange(newRange);
 }
 
 

@@ -1,7 +1,8 @@
+import { signalCommands } from "../commandMaps/signals";
 import { ZWSP } from "../constants/specialCharacters";
 import type { HtmlStructure } from "./htmlComposer"
 
-type command = htmlCommand | textCommand;
+export type command = htmlCommand | textCommand;
 
 type htmlCommand = {
     type: 'html',
@@ -12,7 +13,7 @@ type htmlCommand = {
 type textCommand = {
     type: 'text',
     name: string[],
-    compose: (param: object) => String
+    compose: (param?: object) => string
 }
 
 export const commands: command[] = [
@@ -79,6 +80,20 @@ export const commands: command[] = [
         },
     },
     {
+        name: ['sigma', 'sum'],
+        type: 'html',
+        compose(match) {
+            return {
+                class: "pt-sigma",
+                children: [
+                    { class: "pt-sigma__lower-limit", text: "i = 1", focus: true },
+                    { class: "pt-sigma__upper-limit", text: "n", focus: true },
+                    { class: "pt-sigma__symbol" },
+                ],
+            };
+        },
+    },
+    {
         name: ['^'],
         type: 'html',
         compose(match) {
@@ -99,7 +114,19 @@ export const commands: command[] = [
                 text: match?.[2] ?? '□'
             };
         },
-    }
+    },
+    {
+        name: ['hat'],
+        type: 'html',
+        compose(match) {
+            return {
+                class: "pt-accent pt-accent--hat",
+                text: match?.[2] ?? '□',
+                focus: true
+            }
+        }
+    },
+    ...signalCommands
 ]
 
 

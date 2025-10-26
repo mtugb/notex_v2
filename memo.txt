@@ -1,3 +1,10 @@
 \i
 keydown>ufc検知>setUpList>render()>innerHTML描画
 なにかしら>close()発火>reset()
+
+
+
+# 次の機能
+記号
+lim argmin
+方程式

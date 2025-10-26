@@ -140,6 +140,7 @@ label[for="filemenu"] {
     flex-direction: column;
     grid-column: 3;
     grid-row: 2;
+    overflow: hidden;
 }
 
 .layout__main .file-tabs {
@@ -157,12 +158,21 @@ label[for="filemenu"] {
     border-bottom: 1px solid var(--theme-color);
 }
 
-.layout__main .file-tabs .tab .unsaved {
-    height: 100%;
+.layout__main .file-tabs .tab.focused {
+    background-color: var(--theme-color);
+
+}
+
+.layout__main .file-tabs .tab .close {
+    height: 5em;
     aspect-ratio: 1;
     font-size: .3em;
     display: grid;
     place-content: center;
+}
+
+.layout__main .file-tabs .tab .close:hover {
+    background-color: rgba(255, 255, 255, .7);
 }
 
 .layout__main .file-tabs .tab.ntx::before {
@@ -171,6 +181,11 @@ label[for="filemenu"] {
     height: 1em;
     background: url(/ntx.svg) center/ 90% no-repeat;
     margin-right: .2em;
+}
+
+.layout__main .editor-area {
+    flex-grow: 1;
+    overflow-y: scroll;
 }
 
 .layout__footber {
@@ -215,8 +230,4 @@ label[for="filemenu"] {
 
 .file-tabs {
     flex-shrink: 0;
-}
-
-.editor-area {
-    flex-grow: 1;
 }
