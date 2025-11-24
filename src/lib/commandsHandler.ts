@@ -1,7 +1,7 @@
 import { ZWSP } from "../constants/specialCharacters";
 import { commands } from "./commandsMapper";
 import type { ComplementController } from "./complement";
-import type { FocusController } from "./focusController";
+import { FocusController } from "./focusController";
 import { composeHtml, type HtmlStructure } from "./htmlComposer";
 import { getRange, getStartContainer } from "./rangeUtils";
 
@@ -22,13 +22,13 @@ export function handleCommand(match: RegExpMatchArray, focusController: FocusCon
     callback?.();
 }
 
-export function handleCommandWithArguments(match: RegExpMatchArray, callback?: () => void) {
+export function handleCommandWithArguments(match: RegExpMatchArray, focusController: FocusController, callback?: () => void) {
     const commandName = match[1];
     const command = commands.find(c => c.name.includes(commandName));
     if (!command) return;
     switch (command.type) {
         case 'html': {
-            insertHTML('withArg', match, command.compose(match));
+            insertHTML('withArg', match, command.compose(match), focusController);
             break;
         }
     }
@@ -123,41 +123,40 @@ export function executeCommandIfPossible(
     const commandMatchWithArgument = beforeText.match(/\\([a-zA-Z]+)\{([0-9]{0,2})\}\{([0-9]{0,2})\}$/);
     if (commandMatchWithArgument) {
         option?.keyEvent?.preventDefault();
-        handleCommandWithArguments(commandMatchWithArgument);
+        handleCommandWithArguments(commandMatchWithArgument, focusController);
         return;
     }
     const supsubCommandMatch = beforeText.match(/([\^\_])([a-zA-Z0-9]+)$/);
     if (supsubCommandMatch) {
         option?.keyEvent?.preventDefault();
-        handleCommandWithArguments(supsubCommandMatch);
+        handleCommandWithArguments(supsubCommandMatch, focusController);
         return;
     }
     const enclosedSupsubCommandMatch = beforeText.match(/([\^\_])(\(.+\))$/);
     if (enclosedSupsubCommandMatch) {
         option?.keyEvent?.preventDefault();
-        handleCommandWithArguments(enclosedSupsubCommandMatch);
+        handleCommandWithArguments(enclosedSupsubCommandMatch, focusController);
         return;
     }
-    const fractionCommandMatch = beforeText.match(/([a-zA-Z0-9]+)\/([a-zA-Z0-9]+)$/);
+    let fractionCommandMatch = beforeText.match(/([a-zA-Z0-9∂]+)\/([a-zA-Z0-9∂]+)$/);
+    if (!fractionCommandMatch) fractionCommandMatch = beforeText.match(/\((.+)\)\/\((.+)\)$/)
     if (fractionCommandMatch) {
         console.info('matched');
         option?.keyEvent?.preventDefault();
-        /*
-        <div class="pt-fraction">
-                            <div class="pt-fraction__upper">3</div>
-                            <div class="pt-fraction__lower">2</div>
-                        </div>
-                         */
         const fractionStructure: HtmlStructure = {
             class: 'pt-fraction',
             children: [
                 {
                     class: 'pt-fraction__upper',
-                    text: fractionCommandMatch[1] ?? 'a'
+                    children: [
+                        { text: fractionCommandMatch[1] ?? 'a' }
+                    ]
                 },
                 {
                     class: 'pt-fraction__lower',
-                    text: fractionCommandMatch[2] ?? 'b'
+                    children: [
+                        { text: fractionCommandMatch[2] ?? 'b' }
+                    ]
                 }
             ]
         }

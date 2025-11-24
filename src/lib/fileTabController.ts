@@ -8,7 +8,7 @@ type OpenedFile = {
     isChanged: boolean
 }
 
-class FileTabController {
+export class FileTabController {
     private openedFiles: OpenedFile[] = [];
     private focusedFileId: string | null = null;
     constructor(private tabArea: HTMLDivElement) { }

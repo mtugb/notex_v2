@@ -28,7 +28,7 @@ export const signalCommands:command[] = [
         compose:()=>"ε"
     },
     {
-        name: ['pi', 'p'],
+        name: ['pi'],
         type: 'text',
         compose:()=>"π"
     },
@@ -154,7 +154,7 @@ export const signalCommands:command[] = [
         compose:()=>"∇"
     },
     {
-        name: ['partial'], // 偏微分記号
+        name: ['partial', 'p'], // 偏微分記号
         type: 'text',
         compose:()=>"∂"
     },

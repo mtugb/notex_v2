@@ -1,9 +1,11 @@
 import { setEditorContent } from "../main";
+import type { FileTabController } from "./fileTabController";
 
 export class DirectoryController {
     private dirHandle: FileSystemDirectoryHandle | null = null;
     constructor(
-        private dirViewArea: HTMLElement | null = document.getElementById('dirView')
+        private fileTabController:FileTabController|null,
+        private dirViewArea: HTMLElement | null = document.getElementById('dirView'),
     ) { }
 
     /** ディレクトリハンドルをセット */

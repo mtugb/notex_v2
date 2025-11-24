@@ -18,7 +18,7 @@ type textCommand = {
 
 export const commands: command[] = [
     {
-        name: ['mat', 'matrix'],
+        name: ['pmat', 'pmatrix'],
         type: 'html',
         compose(match?: RegExpMatchArray) {
             let columns = Number(match?.[3]);
@@ -54,6 +54,42 @@ export const commands: command[] = [
         }
     },
     {
+        name: ['bmat', 'bmatrix'],
+        type: 'html',
+        compose(match?: RegExpMatchArray) {
+            let columns = Number(match?.[3]);
+            let rows = Number(match?.[2]);
+            if (!columns || !rows) {
+                columns = 2;
+                rows = 2;
+            };
+            console.log({ columns, rows })
+            let children: HtmlStructure[] = [];
+            let tds: HtmlStructure[] = [];
+
+            for (let t = 0; t < columns; t++) {
+                tds.push({ tag: "td", text: '□', focus: true });
+            }
+            for (let r = 0; r < rows; r++) {
+                children.push({
+                    tag: "tr",
+                    children: tds
+                })
+            }
+            return ({
+                tag: 'div',
+                class: "pt-bracket pt-bracket--array",
+                children: [
+                    {
+                        tag: 'table',
+                        class: "pt-matrix",
+                        children
+                    }
+                ],
+            } satisfies HtmlStructure);
+        }
+    },
+    {
         name: ['integral', 'int'],
         type: 'html',
         compose(match) {
@@ -63,14 +99,20 @@ export const commands: command[] = [
                     {
                         class: "pt-integral__lower-limit", children: [
                             {
-                                text: match?.[2] ?? '□', focus: true
+                                text: match?.[2] ?? '□', focus: {
+                                    withArg: false,
+                                    noArg: true
+                                }
                             }
                         ]
                     },
                     {
                         class: "pt-integral__upper-limit", children: [
                             {
-                                text: match?.[3] ?? '□', focus: true
+                                text: match?.[3] ?? '□', focus: {
+                                    withArg: false,
+                                    noArg: true
+                                }
                             }
                         ]
                     },
@@ -123,6 +165,36 @@ export const commands: command[] = [
                 class: "pt-accent pt-accent--hat",
                 text: match?.[2] ?? '□',
                 focus: true
+            }
+        }
+    },
+    {
+        name: ['cdots'],
+        type: 'html',
+        compose() {
+            return {
+                class: "pt-dots pt-dots--cdots",
+                editable:false,
+            }
+        }
+    },
+    {
+        name: ['vdots'],
+        type: 'html',
+        compose() {
+            return {
+                class: "pt-dots pt-dots--vdots",
+                editable:false,
+            }
+        }
+    },
+    {
+        name: ['ddots'],
+        type: 'html',
+        compose() {
+            return {
+                class: "pt-dots pt-dots--ddots",
+                editable:false,
             }
         }
     },

@@ -4,6 +4,7 @@ export type HtmlStructure = {
     tag?: string,
     class?: string,
     text?: string,
+    editable?: boolean,
     focus?: boolean | {
         withArg: boolean,
         noArg: boolean
@@ -26,6 +27,7 @@ export function composeHtml(structure: HtmlStructure): {
         noArg: []
     };
     structure.class && html.classList.add(...structure.class.split(' '));
+    html.contentEditable = structure.editable === false ? 'false' : 'true';
     html.textContent = structure.text ?? '';
     if (typeof structure.focus === 'boolean') {
         elementsToFocus.withArg.push(html);

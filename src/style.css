@@ -42,3 +42,7 @@
 .row div:focus {
   background-color: #ccc;
 }
+
+.pt-fraction__upper, .pt-fraction__lower {
+  font-size: 1em !important;
+}

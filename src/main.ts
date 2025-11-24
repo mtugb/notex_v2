@@ -1,5 +1,6 @@
 import { ComplementController } from "./lib/complement";
 import { DirectoryController } from "./lib/directryController";
+import { FileTabController } from "./lib/fileTabController";
 import { FocusController } from "./lib/focusController";
 import { keyEventMap } from "./lib/keyeventsMapper";
 import { focus, getRange, getStartContainer } from "./lib/rangeUtils";
@@ -8,8 +9,14 @@ const editor = document.getElementById('editor') as HTMLDivElement;
 let fileName: string | null = null;
 const complementArea = document.getElementById('complement') as HTMLUListElement;
 const complementController = new ComplementController(editor, complementArea);
-const directoryController = new DirectoryController();
 const focusController = new FocusController();
+const fileTabArea = document.querySelector('.file-tabs');
+let fileTabController:FileTabController | null = null;
+if (fileTabArea instanceof HTMLDivElement)
+    fileTabController = new FileTabController(fileTabArea);
+else
+    console.error('[ERROR] .file-tabs not founded')
+const directoryController = new DirectoryController(fileTabController);
 
 editor.addEventListener('keydown', e => {
     if (editor.innerHTML.trim() === '<div class="row"><br></div>') {
@@ -72,6 +79,12 @@ editor.addEventListener('keyup', e => {
             //スペース押したら予測変換解除
             complementController.close();
             complementController.render();
+        }
+    })();
+    (() => {
+        if (e.key === 'Insert') {
+            console.log({fileTabController})
+            
         }
     })();
 })
