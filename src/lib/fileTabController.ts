@@ -32,9 +32,9 @@ export class FileTabController {
         this.focusedFileId = fileId;
 
     }
-    updateActiveContent(newContent: string) {
+    // updateActiveContent(newContent: string) {
 
-    }
+    // }
     /*
 <div class="tab ntx" id="fileName">
             名称未設定

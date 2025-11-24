@@ -1,12 +1,11 @@
 import { setEditorContent } from "../main";
-import type { FileTabController } from "./fileTabController";
 
 export class DirectoryController {
     private dirHandle: FileSystemDirectoryHandle | null = null;
-    constructor(
-        private fileTabController:FileTabController|null,
-        private dirViewArea: HTMLElement | null = document.getElementById('dirView'),
-    ) { }
+    private dirViewArea: HTMLElement | null;
+    constructor() {
+        this.dirViewArea = document.getElementById('dirView');
+    }
 
     /** ディレクトリハンドルをセット */
     setDirHandle(handle: FileSystemDirectoryHandle) {
@@ -40,7 +39,7 @@ export class DirectoryController {
         await writable.close();
     }
 
-    async saveFileAs(content:string):Promise<string> {
+    async saveFileAs(content: string): Promise<string> {
         const fileHandle = await window.showSaveFilePicker({
             suggestedName: 'newNote.ntx', // 初期ファイル名
             types: [

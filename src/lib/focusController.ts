@@ -1,5 +1,5 @@
 import { ZWSP } from "../constants/specialCharacters";
-import { getRange, getStartContainer } from "./rangeUtils";
+import { getStartContainer } from "./rangeUtils";
 
 class FocusList {
     public selection = 0;

@@ -1,5 +1,4 @@
 import { signalCommands } from "../commandMaps/signals";
-import { ZWSP } from "../constants/specialCharacters";
 import type { HtmlStructure } from "./htmlComposer"
 
 export type command = htmlCommand | textCommand;
@@ -124,7 +123,7 @@ export const commands: command[] = [
     {
         name: ['sigma', 'sum'],
         type: 'html',
-        compose(match) {
+        compose(_) {
             return {
                 class: "pt-sigma",
                 children: [

@@ -1,5 +1,5 @@
 import type { ComplementController } from "../lib/complement";
-import { focus, getRange, getStartContainer } from "../lib/rangeUtils";
+import { focus, getStartContainer } from "../lib/rangeUtils";
 
 export function handleEnter(e: KeyboardEvent, controller: ComplementController) {
     e.preventDefault();

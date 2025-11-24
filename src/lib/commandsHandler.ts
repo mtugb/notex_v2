@@ -95,9 +95,9 @@ function insertHTML(commandMode: 'withArg' | 'noArg', match: RegExpMatchArray, h
 
 
 export function executeCommandIfPossible(
-    complementController: ComplementController,
+    _complementController: ComplementController,
     focusController: FocusController,
-    triggerType: 'spaceKey' | 'operation',
+    _triggerType: 'spaceKey' | 'operation',
     option: { keyEvent?: KeyboardEvent }
 ) {
     const sel = document.getSelection();

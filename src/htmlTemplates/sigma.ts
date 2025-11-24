@@ -8,15 +8,3 @@ export const sigma: HtmlStructure = {
     { class: "pt-sigma__symbol" },
   ],
 };
-
-const following: HtmlStructure[] = [
-  {
-    text: "i",
-    children: [{ class: "pt-sup", text: "3" }],
-  },
-  { text: " + a" },
-  {
-    children: [{ class: "pt-sub", text: "i" }],
-  },
-  { children: [{ class: "pt-sup", text: "2" }] },
-];

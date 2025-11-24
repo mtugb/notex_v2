@@ -1,5 +1,4 @@
 import { handleArrowDown } from "../keyevents/ArrowDown";
-import { handleArrowRight } from "../keyevents/ArrowRight";
 import { handleArrowUp } from "../keyevents/ArrowUp";
 import { handleEnter } from "../keyevents/Enter";
 import { handleEqual, handleMinus, handlePlus, handleTimes } from "../keyevents/Operators";
@@ -13,7 +12,6 @@ type KeyEventMap = Record<string, KeyEventFunction>;
 
 export const keyEventMap:KeyEventMap = {
     'Enter': handleEnter,
-    'ArrowRight': handleArrowRight,
     'ArrowUp': handleArrowUp,
     'ArrowDown': handleArrowDown,
     ' ': handleSpace,

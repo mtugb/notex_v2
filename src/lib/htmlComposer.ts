@@ -1,5 +1,3 @@
-import { ZWSP } from "../constants/specialCharacters"
-
 export type HtmlStructure = {
     tag?: string,
     class?: string,
